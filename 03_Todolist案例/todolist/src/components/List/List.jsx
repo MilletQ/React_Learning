@@ -4,10 +4,12 @@ import Item from "../Item/Item";
 
 export default class List extends Component {
   render() {
+    const { todos } = this.props; // Destructure todos from props
     return (
-      <ul class="todo-main">
-        <Item />
-        <Item />
+      <ul className="todo-main">
+        {todos.map((todo) => (
+          <Item key={todo.id} todo={todo} />
+        ))}
       </ul>
     );
   }
