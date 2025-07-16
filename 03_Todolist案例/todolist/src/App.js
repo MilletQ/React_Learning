@@ -35,6 +35,15 @@ class App extends Component {
     this.setState({ todos: updatedTodos });
   };
 
+  checkAllTodos = (checked) => {
+    const { todos } = this.state;
+    const updatedTodos = todos.map((todo) => ({
+      ...todo,
+      completed: checked, // Toggle completion status
+    }));
+    this.setState({ todos: updatedTodos });
+  };
+
   render() {
     const { todos } = this.state;
     return (
@@ -50,6 +59,7 @@ class App extends Component {
             <Footer
               todos={todos}
               deleteAllCompletedTodo={this.deleteAllCompletedTodo}
+              checkAllTodos={this.checkAllTodos}
             />
           </div>
         </div>

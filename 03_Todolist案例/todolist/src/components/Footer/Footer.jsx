@@ -5,6 +5,9 @@ export default class Footer extends Component {
   handleClick = () => {
     this.props.deleteAllCompletedTodo(); // Call deleteAllCompletedTodo from props
   };
+  handleCheckAll = (event) => {
+    this.props.checkAllTodos(event.target.checked); // Call checkAllTodos with the checked status
+  };
   render() {
     const { todos } = this.props;
     const completedCount = todos.reduce(
@@ -12,10 +15,16 @@ export default class Footer extends Component {
       0
     );
 
+    const isAllCompleted = completedCount === todos.length && todos.length > 0;
+
     return (
       <div className="todo-footer">
         <label>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={isAllCompleted}
+            onChange={this.handleCheckAll}
+          />
         </label>
         <span>
           <span>
