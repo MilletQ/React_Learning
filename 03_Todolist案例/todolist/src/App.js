@@ -7,7 +7,7 @@ import Footer from "./components/Footer/Footer";
 class App extends Component {
   state = {
     todos: [
-      { id: 1, name: "Learn React", completed: false },
+      { id: 1, name: "Learn React", completed: true },
       { id: 2, name: "Build a Todo App", completed: false },
       { id: 3, name: "Master JavaScript", completed: false },
     ],
@@ -15,6 +15,18 @@ class App extends Component {
   addTodo = (newTodo) => {
     const { todos } = this.state;
     this.setState({ todos: [newTodo, ...todos] });
+  };
+  updateTodo = (id, isCompleted) => {
+    const { todos } = this.state;
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: isCompleted } : todo
+    );
+    this.setState({ todos: updatedTodos });
+  };
+  deleteTodo = (id) => {
+    const { todos } = this.state;
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    this.setState({ todos: updatedTodos });
   };
 
   render() {
@@ -24,7 +36,11 @@ class App extends Component {
         <div className="todo-container">
           <div className="todo-wrap">
             <Header addTodo={this.addTodo} />
-            <List todos={todos} />
+            <List
+              todos={todos}
+              updateTodo={this.updateTodo}
+              deleteTodo={this.deleteTodo}
+            />
             <Footer />
           </div>
         </div>
