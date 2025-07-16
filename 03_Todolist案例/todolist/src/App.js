@@ -29,6 +29,12 @@ class App extends Component {
     this.setState({ todos: updatedTodos });
   };
 
+  deleteAllCompletedTodo = () => {
+    const { todos } = this.state;
+    const updatedTodos = todos.filter((todo) => !todo.completed);
+    this.setState({ todos: updatedTodos });
+  };
+
   render() {
     const { todos } = this.state;
     return (
@@ -41,7 +47,10 @@ class App extends Component {
               updateTodo={this.updateTodo}
               deleteTodo={this.deleteTodo}
             />
-            <Footer />
+            <Footer
+              todos={todos}
+              deleteAllCompletedTodo={this.deleteAllCompletedTodo}
+            />
           </div>
         </div>
       </div>
